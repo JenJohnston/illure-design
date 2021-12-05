@@ -1,7 +1,7 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
+  "name": "illure-design",
+  "version": "1.0.0",
+  "description": "website for Illure Design",
   "main": "index.js",
   "private": true,
   "scripts": {
@@ -12,16 +12,13 @@
     "clean": "rd /s /q dist"
   },
   "repository": {
-    "type": "",
-    "url": ""
+    "type": "git",
+    "url": "https://github.com/JenJohnston/illure-design"
   },
   "keywords": [],
-  "author": "",
+  "author": "jen@illure-design.com",
   "license": "ISC",
-  "bugs": {
-    "url": ""
-  },
-  "homepage": "",
+  "homepage": "https://github.com/JenJohnston/",
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
