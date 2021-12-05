@@ -1,0 +1,61 @@
+.main-content
+{
+    z-index: 2;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    overflow: hidden;
+    color: #fff;
+    font-family: corporate-a-std-urw-cond, serif;
+    font-weight: 500;
+    font-style: normal;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1.05fr 1fr;
+
+    .hero-section
+    {
+
+        grid-row: 1;
+        justify-self: center;
+        align-self: center;
+
+        .title 
+        {
+        font-family: newcomen, sans-serif;
+        font-weight: 300;
+        font-style: normal;
+        font-size: clamp(1rem, 9.75vw, 3.15rem);
+        color: #4db1bc;
+        text-shadow: 1px 1px 2px rgb(3, 42, 68), 0 0 1em rgb(1, 40, 63), 0 0 0.2em rgb(2, 28, 71);
+        animation: glow 0.7s ease-in-out infinite alternate;
+        }
+
+        p
+        {
+            text-align: center;
+            font-size: clamp(1.25rem, 7.25vw, 2.15rem);
+            color: $orange;
+            text-shadow: 1px 1px 2px rgb(3, 42, 68), 0 0 1em rgb(1, 40, 63), 0 0 0.2em rgb(2, 28, 71);
+
+        }
+
+        @keyframes glow {
+            from {
+              text-shadow: 0 0 30px #01ffd5;
+            }
+            to {
+              text-shadow: 0 0 40px #2f70b9, 0 0 30px #1375f5;
+            }
+          }
+    }
+  
+
+    footer
+    {
+        grid-row: 2;
+        align-self: flex-end;
+    }
+}
+

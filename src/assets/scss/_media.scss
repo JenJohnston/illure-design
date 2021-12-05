@@ -1,0 +1,53 @@
+@media screen and (min-width: 1180px)
+{
+
+    .main-content
+    {
+        height: 100%;
+    }
+
+    .mobile-container
+    {
+        margin-top: 0;
+
+        .nav-toggle
+        {
+            display: none;
+        }
+    }
+
+    .site-nav,
+    .media-nav
+    {
+        visibility: visible;
+        opacity: 1;
+        background-color: transparent;
+    }
+
+    footer
+    {
+        flex-direction: row;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+        .mobile-container
+        {
+            order: 2;
+        }
+    }
+
+    .main-menu
+    {
+        display: flex;
+        width: 24rem;
+        justify-content: space-around;
+    }
+
+    .media-nav
+    {
+        margin-top: 0;
+        flex-direction: row;
+        align-items: center;
+        gap: 4rem;
+    }
+}

@@ -1,0 +1,158 @@
+a 
+{
+    text-decoration: none;
+}
+
+.site-nav
+{
+    background-color: rgba(0,0,0,0.5);
+    padding: 1rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+
+    .main-menu
+    {
+        .menu-links
+        {
+            padding: 0.25rem 0;
+        }
+
+        a
+        {
+            color: $light-blue;
+            text-transform: uppercase;
+            font-size: 1.45rem;
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover
+        {
+            text-shadow: 0 0 40px #2f70b9, 0 0 30px #1375f5;
+        }
+    }
+}
+
+.mobile-container {
+    margin-top: 1rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .logo-container 
+    {
+        width: 6rem;
+    }
+
+    .nav-toggle 
+    {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 3.25rem;
+        height: 3.25rem;
+        cursor: pointer;
+        transition: all 0.5s ease-in-out;
+        border: 3px solid #4db1bc;
+        border-radius: 50%;
+    }
+
+    .nav-btn 
+    {
+        width: 2rem;
+        height: 4px;
+        background-color: #4db1bc;
+        border-radius: 0.35rem;
+        box-shadow: 0 2px 5px rgba(27, 1, 64, 1);
+        transition: all 0.5s ease-in-out;
+    }
+    
+    .nav-btn::before,
+    .nav-btn::after
+    {
+        content: '';
+        position: absolute;
+        width: 2rem;
+        height: 4px;
+        background-color: #4db1bc;
+        border-radius: 0.35rem;
+        box-shadow: 0 2px 5px rgba(27, 1, 64, 1);
+        transition: all 0.5s ease-in-out;
+    }
+    
+    .nav-btn::before 
+    {
+        transform: translateY(-0.65rem)
+    }
+    
+    .nav-btn::after 
+    {
+        transform: translateY(0.65rem)
+    }
+    
+    /* Hamburger Animation */
+
+    .nav-toggle.open .nav-btn {
+        transform: translateX(-1.5rem);
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .nav-toggle.open .nav-btn::before {
+        transform: rotate(45deg) translate(1rem, -1rem)
+    }
+
+    .nav-toggle.open .nav-btn::after {
+        transform: rotate(-45deg) translate(1rem, 1rem)
+    }
+ 
+}
+
+.media-nav 
+{
+    background-color: rgba(0,0,0,0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 1rem;
+
+   .media-menu
+   {
+       display: flex;
+       gap: 1rem;
+       justify-content: left;
+       margin-top: 1rem;
+
+   }
+    
+    svg,
+    img 
+    {
+        width: 2.5rem;
+    }
+}
+
+.contact-menu
+{
+    a 
+    {
+        color: $orange;
+        font-size: 1.25rem;
+    }
+    
+}
+
+svg{
+    color: #1686B0;
+}
+
+.show-nav
+{
+    visibility: visible;
+    opacity: 1;
+}

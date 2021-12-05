@@ -1,0 +1,18 @@
+footer{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .site-nav {
+        order: 1;
+    }
+
+    .mobile-container {
+        order: 3;
+    }
+
+    .media-nav
+    {
+        order: 2;
+    }
+}
