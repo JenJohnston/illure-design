@@ -3,6 +3,7 @@ uniform float uSize;
 uniform float uTime;
 
 varying vec2 vUv;
+varying vec3 vPosition;
 
 attribute float aScale;
 
@@ -20,4 +21,5 @@ void main()
     gl_PointSize *= (1.0 / - viewPosition.z);
 
     vUv = uv;
+    vPosition = position;
 }

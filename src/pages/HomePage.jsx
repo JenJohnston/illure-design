@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import NavBar from '../components/NavBar'
 import { loadBackground } from '../webGL/homeBackground'
 
-loadBackground()
+// loadBackground()
 
 const HomePage = () => {
     return (

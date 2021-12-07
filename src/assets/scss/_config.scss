@@ -4,5 +4,12 @@ $orange: #f4780a;
 body
 {
     font-size: 100%;
-    background-color: #06012f;
+    background-color: #0a0c1f;
+}
+
+// RTF Canvas Sizing
+
+#root > div
+{
+    position: fixed !important;
 }

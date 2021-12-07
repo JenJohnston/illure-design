@@ -80,6 +80,8 @@ export function loadBackground(){
     const firefliesMaterial = new THREE.ShaderMaterial({
         uniforms:
         {
+            uColor1: { value: '#ed7af5'},
+            uColor1: { value: '#3de9fc'},
             uTime: { value: 0},
             uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
             uSize: { value: 100 }
@@ -152,11 +154,17 @@ export function loadBackground(){
     water.position.y = -1.5;
     water.rotation.x = Math.PI * - 0.5;
     scene.add( water ); 
+
+    console.log(water)
     
     /**
      *  Models
      */
     let arcaneSphere = new THREE.Object3D();
+
+    gltfLoader.load(
+        'models/arcaneSphere.glb', init
+    )
     
     const particleTreeOne = new treeModels(
         {
@@ -249,9 +257,7 @@ export function loadBackground(){
     
     
     
-    gltfLoader.load(
-        'models/arcaneSphere.glb', init
-    )
+    
     
     /**
      * Sizes

@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "dev": "webpack serve",
+    "dev": "webpack serve --history-api-fallback",
     "watch": "webpack --watch",
     "build": "NODE_ENV=production webpack",
     "builddev": "webpack",
@@ -45,6 +45,7 @@
     "sass-loader": "^12.3.0",
     "spectorjs": "^0.9.27",
     "three": "^0.135.0",
+    "three-stdlib": "^2.6.1",
     "webpack": "^5.64.3",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.5.0"
