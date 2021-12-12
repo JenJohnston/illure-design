@@ -97,6 +97,8 @@ module.exports =
     {
         static: "./dist",
         historyApiFallback: true,
-        hot: true
+        hot: true,
+        
+
     }
 }

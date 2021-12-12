@@ -1,4 +1,6 @@
+uniform float time;
 uniform float uTime;
+uniform float uDistortion;
 
 varying vec2 vUv;
 varying vec3 vPosition;
@@ -146,16 +148,19 @@ float PI = 3.141592653589793238;
 void main()
 {
 
-    distortion = curlNoise(vec3(position.x, position.y, 0));
+    vec3 distortion = vec3(position.x*2.0, position.y*2.0, 1.0)*curlNoise(vec3( 
+    position.x * 2.0 * time * 1.5, 
+    position.y * 2.0 * time * 1.5,
+    (position.x + position.y) * 0.08
+    )) * uDistortion;
 
     vec3 finalPosition = position + distortion;
 
-    vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-    vec4 viewPosition = viewMatrix * modelPosition;
-    vec4 projectionPosition = projectionMatrix * viewPosition;
+    vec4 mvPosition = modelViewMatrix * vec4(finalPosition, 1.0);
+    mvPosition.y += sin(time * 10.0 + mvPosition.x * 0.05) * 0.025;
 
-    gl_PointSize = 2.5 * ( 1.0 / - viewPosition.z );
-    gl_Position = projectionPosition;
+    gl_PointSize = 2.5;
+    gl_Position = projectionMatrix * mvPosition;
 
     vUv = uv;
     vPosition = position;

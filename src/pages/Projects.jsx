@@ -1,7 +1,13 @@
 // Webgl Imports
+import gsap from 'gsap'
+
 import * as dat from 'dat.gui'
 import * as THREE from 'three'
 import { Water } from 'three/examples/jsm/objects/Water2.js'
+
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
@@ -41,6 +47,15 @@ const scene = new THREE.Scene()
 // Texture loader
 const textureLoader = new THREE.TextureLoader()
 
+const img1 = textureLoader.load('textures/nature-1.jpg')
+const img2 = textureLoader.load('textures/nature-2.jpg')
+
+const imgArray = 
+[
+    img1,
+    img2
+]
+
 // Draco loader
 const dracoLoader = new DRACOLoader()
 dracoLoader.setDecoderPath('draco/')
@@ -51,9 +66,9 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 
 // Debug
-const gui = new dat.GUI({
-    width: 400 
-})
+// const gui = new dat.GUI({
+//     width: 400 
+// })
 
 scene.background = new THREE.Color(0x0a0c1f);
 
@@ -116,20 +131,25 @@ function init(gltf){
 
 // Geometry
 
-const imageParticlesGeometry = new THREE.PlaneBufferGeometry(1.51 * 1.1, 1 * 1.1, 650, 431)
+const imageParticlesGeometry = new THREE.PlaneBufferGeometry(1.6550, 1.0775, 650, 431)
 
 // Material
 
 const imageParticlesMaterial = new THREE.ShaderMaterial(
     {
+        depthTest: false,
+        depthWrite: false,
         extensions: 
         {
             derivatives: "#extension GL_OES_standard_derivates : enable"
         },
         side: THREE.DoubleSide,
         uniforms: {
+            time: { type: "f", value: 0 },
             uTime: { type: "f", value: 0 },
-            uTexture: { type: "t", value: textureLoader.load('textures/nature-1.jpg') },
+            uProgress: { type: "f", value: 0 },
+            uDistortion: { type: "f", value: 0 },
+            uTexture: { type: "t", value: imgArray[0] },
             uResolution: { type: "v4", value: new THREE.Vector4() },
             uUvRatel: 
             {
@@ -147,19 +167,11 @@ const imageParticlesMesh = new THREE.Points(imageParticlesGeometry, imageParticl
 
 scene.add(imageParticlesMesh)
 
+imageParticlesMesh.position.x = 3.407
 imageParticlesMesh.position.y = -.853
 imageParticlesMesh.position.z = -3.623
-imageParticlesMesh.position.x = 3.407
 
 imageParticlesMesh.rotation.y = -0.735
-
-gui.add(imageParticlesMesh.rotation, 'y', -3, 3, 0.001).name('rotationY')
-gui.add(imageParticlesMesh.rotation, 'x', -3, 3, 0.001).name('rotationX')
-gui.add(imageParticlesMesh.rotation, 'z', -3, 3, 0.001).name('rotationZ')
-
-gui.add(imageParticlesMesh.position, 'y', -3, 3, 0.001).name('positionY')
-gui.add(imageParticlesMesh.position, 'x', -10, 10, 0.001).name('positionX')
-gui.add(imageParticlesMesh.position, 'z', -10, 10, 0.001).name('positionZ')
 
 /**
 * Water 
@@ -169,7 +181,12 @@ gui.add(imageParticlesMesh.position, 'z', -10, 10, 0.001).name('positionZ')
     color: '#a8f8ff',
     scale: 4,
     flowX: 0.025,
-    flowY: 0.025
+    flowY: 0.025,
+
+    exposure: 1,
+    bloomStrength: 0,
+    bloomThreshold: 0,
+    bloomRadius: 0
 };
 
 // geometry
@@ -186,6 +203,7 @@ let water = new Water( waterGeometry, {
 water.position.y = -1.5;
 water.rotation.x = Math.PI * - 0.5;
 scene.add( water ); 
+
 
 /**
 *   Sizes    
@@ -235,7 +253,7 @@ scene.add(pointLight)
 **/
 
 // Base camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 50)
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 5000)
 camera.position.x = 4.425
 camera.position.y = -1.433
 camera.position.z = -5
@@ -257,8 +275,92 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 /**
+*   Post Processing
+*/
+
+const renderScene = new RenderPass( scene, camera );
+
+const bloomPass = new UnrealBloomPass( new THREE.Vector2( sizes.innerWidth, sizes.innerHeight ), 1.5, 0.4, 0.85 );
+bloomPass.threshold = params.bloomThreshold;
+bloomPass.strength = params.bloomStrength;
+bloomPass.radius = params.bloomRadius;
+
+const composer = new EffectComposer( renderer );
+composer.addPass( renderScene );
+composer.addPass( bloomPass );
+composer.setSize(sizes.width, sizes.height)
+
+/**
 * Animate
 **/
+
+// pagination for images
+
+const pageControl = document.querySelector('.img-slider')
+let currentTexture = 0
+
+for (let idx = 0; idx < imgArray.length; idx +=1){
+    document.querySelector('.img-slider').innerHTML += ' <button class="pagButton" data-idx="' + idx + '"></button>'
+}
+
+document.querySelector('.img-slider').querySelector('button').classList.add('active');
+
+pageControl.addEventListener('click', (e)=> {
+
+    let controlTarget = e.target
+
+    // gsap
+
+    gsap.to(imageParticlesMesh.material.uniforms.uDistortion,
+    {
+        duration: 0.5,
+        value: 4,
+        opacity: 0,
+        ease: 'power2.inOut'
+    })
+
+    gsap.to(bloomPass,
+    {
+        duration: 0.5,
+        strength: 0.35,
+        delay: 1.5
+    })
+
+    gsap.to(imageParticlesMesh.material.uniforms.uDistortion,
+    {
+        duration: 0.5,
+        value: 0,
+        delay: 3,
+        ease: 'power2.inOut'
+    })
+
+    gsap.to(bloomPass,
+    {
+        duration: 0.5,
+        strength: 0,
+        opacity: 1,
+        delay: 3,
+        ease: 'power2.out'
+    })
+
+
+    if (controlTarget.hasAttribute('data-idx')){
+        currentTexture = Number(controlTarget.dataset.idx)
+    }
+    console.log(currentTexture)
+
+//    materialPlaneMaterial.map = textureArray[currentTexture]
+
+    const delay = 3200
+
+    setTimeout( () => {
+        imageParticlesMesh.material.uniforms.uTexture.value = imgArray[currentTexture]
+    }, delay);
+
+})
+
+
+
 
 const clock = new THREE.Clock()
 
@@ -266,7 +368,14 @@ const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
 
+    // update image distortion
+
+    imageParticlesMesh.material.uniforms.time.value = elapsedTime * 0.1
+    imageParticlesMesh.material.uniforms.uTime.value = elapsedTime * 0.1
+    imageParticlesMesh.material.uniforms.uTime.value = imageParticlesMesh.material.uniforms.uDistortion.value
+
     // update leaves
+
 
     if (bloomLeavesOne.isActive)
         {
@@ -282,7 +391,8 @@ const tick = () =>
     controls.update()
 
     // Render
-    renderer.render(scene, camera)
+    // renderer.render(scene, camera)
+    composer.render()
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
@@ -291,18 +401,22 @@ const tick = () =>
 tick()
 })
 
+// react
+
+
 const Projects = () => {
     return (
         <>
            <canvas className="projects-webgl"></canvas>
-            {/* <div className="main-content">
+            <div className="main-content">
                 <section className="hero-section">
                         <h1>Projects</h1>
+                        <div className="img-slider"></div>
                 </section>
                 <footer>
                     <NavBar />
                 </footer>
-            </div> */}
+            </div>
         </>
     )
 }
