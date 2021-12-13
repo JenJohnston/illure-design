@@ -349,7 +349,7 @@ pageControl.addEventListener('click', (e)=> {
     }
     console.log(currentTexture)
 
-//    materialPlaneMaterial.map = textureArray[currentTexture]
+    // timeout function
 
     const delay = 3200
 
