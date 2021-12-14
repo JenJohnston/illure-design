@@ -5,7 +5,7 @@ import IllureLogo from '../assets/images/illure-logo.png'
 import FacebookSVG from '../assets/images/svg/facebook_icon.svg'
 import InstagramSvg from '../assets/images/svg/instagram_icon.svg'
 import LinkedInSvg from '../assets/images/svg/linkedin_icon.svg'
-import SnapChatLogo from '../assets/images//snapchat_icon.png'
+import SnapChatLogo from '../assets/images/snapchat_icon.png'
 import WhatsAppLogo from '../assets/images/whatsApp_icon.png'
 
 function toggleHamburger() {

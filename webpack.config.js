@@ -38,8 +38,8 @@ module.exports =
     target: target,
 
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        assetModuleFilename: "images/[hash][ext][query]"
+        path: path.resolve(__dirname, './dist'),
+        assetModuleFilename: "./images/[hash][ext][query]"
     },
 
     module: 
