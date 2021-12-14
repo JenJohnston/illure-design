@@ -412,7 +412,7 @@ tick()
 const Projects = () => {
     return (
         <>
-            <canvas className="webgl hidden"></canvas>
+            
             <canvas className="projects-webgl"></canvas>
             <div className="main-content">
                 <section className="hero-section">

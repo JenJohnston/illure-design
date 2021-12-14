@@ -414,15 +414,13 @@ const HomePage = () => {
                     <span className="one">I</span><span className="two">L</span><span className="three">L</span><span className="four">U</span><span className="five">R</span><span className="six">E</span> <span className="seven">D</span><span className="eight">E</span><span className="nine">S</span><span className="ten">I</span><span className="eleven">G</span><span className="twelve">N</span>
                 </h1>
                 <p>Modern Web Development</p>
-                <div className="img-slider hidden"></div>
+                
             </section>
             <footer>
                 <NavBar />
             </footer>
         </div>
-        <div className="hidden">
-            <canvas className="projects-webgl hidden"></canvas>
-        </div>
+       
          <canvas className="webgl"></canvas>
         </>
     )

@@ -19,12 +19,12 @@ function App(){
         <>
             <Router>
                 <Routes>
-                    <Route path="/" element={<HomePage/>} />
+                    <Route index element={<HomePage/>} />
                     <Route path="/projects" element={<Projects/>} />
                     <Route path="/gallery" element={<Gallery/>} />
                     <Route path="/about" element={<About/>} />
                     <Route path="/404" element={<PageNotFound/>} />
-                </Routes>    
+                </Routes>
             </Router>
         </>
     )
