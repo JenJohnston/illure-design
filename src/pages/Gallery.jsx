@@ -132,14 +132,14 @@ const Gallery = () => {
     return (
         <>
         <canvas className="gallery-webgl"></canvas>
-        {/* <div className="main-content">
+        <div className="main-content">
             <section className="hero-section">
                 <h1>Gallery</h1>
             </section>
             <footer>
                 <NavBar />
             </footer>
-        </div> */}
+        </div>
         </>
     )
 }

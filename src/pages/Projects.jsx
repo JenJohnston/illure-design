@@ -24,15 +24,15 @@ import imageParticleFragmentShader from '../shaders/imageParticles/fragment.glsl
 // React Imports
 
 import ReactDOM from 'react-dom'
-import React, { useRef, useState, useMemo } from 'react'
 
 // Components
 
 import NavBar from '../components/NavBar'
 
-window.addEventListener('load', function(e){
-    /********** Initial Scene Setup **********/
+console.log(OrbitControls)
 
+document.addEventListener('DOMContentLoaded', function(e){
+    /********** Initial Scene Setup **********/
 // Canvas
 
 const canvasProjects = document.querySelector('canvas.projects-webgl')
@@ -259,9 +259,6 @@ camera.position.y = -1.433
 camera.position.z = -5
 scene.add(camera)
 
-// Controls
-const controls = new OrbitControls(camera, canvasProjects)
-controls.enableDamping = true
 
 /**
  * Renderer
@@ -273,6 +270,10 @@ controls.enableDamping = true
 
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+// Controls
+const controls = new OrbitControls(camera, canvasProjects)
+controls.enableDamping = true
 
 /**
 *   Post Processing
@@ -299,9 +300,13 @@ composer.setSize(sizes.width, sizes.height)
 const pageControl = document.querySelector('.img-slider')
 let currentTexture = 0
 
+
 for (let idx = 0; idx < imgArray.length; idx +=1){
     document.querySelector('.img-slider').innerHTML += ' <button class="pagButton" data-idx="' + idx + '"></button>'
 }
+    
+
+
 
 document.querySelector('.img-slider').querySelector('button').classList.add('active');
 
@@ -407,7 +412,8 @@ tick()
 const Projects = () => {
     return (
         <>
-           <canvas className="projects-webgl"></canvas>
+            <canvas className="webgl hidden"></canvas>
+            <canvas className="projects-webgl"></canvas>
             <div className="main-content">
                 <section className="hero-section">
                         <h1>Projects</h1>
