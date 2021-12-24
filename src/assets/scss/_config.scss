@@ -1,5 +1,13 @@
+// color palette
+
 $light-blue: #8be1ff;
 $orange: #f4780a;
+$lavender: #d7b4f3;
+$lavender-drk: #734f96;
+
+// text shadow
+
+$txt-shadow: 1px 1px 2px rgb(3, 42, 68), 0 0 1em rgb(1, 40, 63), 0 0 0.2em rgb(2, 28, 71);
 
 body
 {
@@ -7,9 +15,5 @@ body
     background-color: #0a0c1f;
 }
 
-// RTF Canvas Sizing
 
-#root > div
-{
-    position: fixed !important;
-}
+

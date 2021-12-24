@@ -31,7 +31,7 @@ const NavBar = () => {
         <>
         <nav className="site-nav">
             <ul className="main-menu">
-                <li className="menu-links"><Link to="/projects">Projects</Link></li>
+                <li className="menu-links"><Link to="/projects" onClick="window.location.reload();">Projects</Link></li>
                 <li className="menu-links"><Link to="/gallery">Gallery</Link></li>
                 <li className="menu-links"><Link to="/about">About</Link></li>
             </ul>

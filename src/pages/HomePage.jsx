@@ -1,3 +1,5 @@
+// webgl
+
 import * as dat from 'dat.gui'
 import * as THREE from 'three'
 
@@ -13,11 +15,13 @@ import firefliesFragmentShader from '../shaders/fireflies/fragment.glsl'
 import energyBallVertexShader from '../shaders/energyBall/vertex.glsl'
 import energyBallFragmentShader from '../shaders/energyBall/fragment.glsl'
 
+//react
+
 import React from 'react'; 
-import {Link} from 'react-router-dom';
 
 import NavBar from '../components/NavBar'
 
+// pages
 
 window.addEventListener('load', function(e){
     // Canvas
@@ -420,8 +424,13 @@ const HomePage = () => {
                 <NavBar />
             </footer>
         </div>
-       
-         <canvas className="webgl"></canvas>
+        <div className='show-canvas'>
+            <canvas className="webgl"></canvas>
+        </div>
+        <div className="hide-canvas">
+            <div className="img-slider"></div>
+            <canvas className="projects-webgl"></canvas>
+        </div>
         </>
     )
 }

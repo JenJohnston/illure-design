@@ -28,7 +28,7 @@
         font-style: normal;
         font-size: clamp(1rem, 9.75vw, 3.15rem);
         color: #4db1bc;
-        text-shadow: 1px 1px 2px rgb(3, 42, 68), 0 0 1em rgb(1, 40, 63), 0 0 0.2em rgb(2, 28, 71);
+        text-shadow: $txt-shadow;
         animation: glow 0.7s ease-in-out infinite alternate;
         }
 
@@ -51,11 +51,7 @@
           }
     }
 
-    .hidden {
-      display: none;
-    }
-  
-
+   
     footer
     {
         grid-row: 2;
