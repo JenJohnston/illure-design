@@ -295,12 +295,14 @@ document.addEventListener('DOMContentLoaded', function(e){
     
     
     for (let idx = 0; idx < imgArray.length; idx +=1){
-        document.querySelector('.img-slider').innerHTML += '<div class="btn-container"><button class="pagButton" data-idx="' + idx + '"></button></div>'
+        document.querySelector('.img-slider').innerHTML += '<div class="btn-container" data-idx="' + idx + '"><button class="pagButton" data-idx="' + idx + '"></button></div>'
     }
         
+    document.querySelector('.img-slider').querySelector('.btn-container').classList.add('active');
     
     pageControl.addEventListener('click', (e)=> {
-    
+
+        
         let controlTarget = e.target
     
         // gsap
@@ -337,10 +339,18 @@ document.addEventListener('DOMContentLoaded', function(e){
     
     
         if (controlTarget.hasAttribute('data-idx')){
+
             currentTexture = Number(controlTarget.dataset.idx)
+
+            // update the active selector
+
+            document.querySelector('.img-slider .active').classList.remove('active');
+            document.querySelectorAll('.btn-container')[currentTexture].classList.add('active');
+
+
         }
-        console.log(currentTexture)
     
+        
         // timeout function
     
         const delay = 3200
@@ -350,8 +360,6 @@ document.addEventListener('DOMContentLoaded', function(e){
         }, delay);
     
     })
-    
-    document.querySelector('.btn-container').querySelector('.pagButton').classList.add('active');
     
     
     const clock = new THREE.Clock()
