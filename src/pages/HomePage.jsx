@@ -428,7 +428,7 @@ const HomePage = () => {
             <canvas className="webgl"></canvas>
         </div>
         <div className="hide-canvas">
-            <div className="img-slider"></div>
+            <div className="img-slider slider-section"></div>
             <canvas className="projects-webgl"></canvas>
         </div>
         </>

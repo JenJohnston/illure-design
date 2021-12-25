@@ -1,24 +1,51 @@
 .projects-main {
     display: grid;
-    grid-template-rows: 2.35fr 1fr;
-    grid-template-columns: subgrid;
-    margin-top: 6rem;
+    grid-template-rows: 1.4fr 1fr;
+    grid-template-columns: 1fr;
+    margin-top: 4rem;
+    width: 100vw;
+    margin-bottom: -2rem;
     
-
     .title {
         grid-row: 1;
+        text-align: center;
     }
 
     .slider-section {
         grid-row: 2;
-
-        p {
+        display: grid;
+        grid-template-columns: 1.1fr auto 1fr;
+        grid-template-rows: 1fr 1fr;
+        
+        .sub-title {
+            text-align: left;
             margin-bottom: 4rem;
+            grid-row: 1;
+            grid-column: 1;
+            justify-self: end;
+
+            p {
+                text-align: left;
+            }
         }
 
         .img-slider {
             display: flex;
-            column-gap: 1rem;
+            column-gap: 0.5rem;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 1.4rem;
+            padding: 1rem;
+            width: 20rem;
+            height: 4.8rem;
+            grid-row: 2;
+            grid-column: 2;
+        }
+
+        .btn-container {
+            margin: 0.5rem;
+            border-radius: 50%;
+            border: none;
+            transition: all 0.15s ease-in-out;
         }
 
         .pagButton {
@@ -28,11 +55,16 @@
             border: none;
             background-color: $lavender-drk;
             display: block;
+            transition: all 0.15s ease-in-out;
+        }
+
+        .btn-active {
+            width: 0.7rem;
+            height: 0.7rem;
         }
 
         .active {
-            border: 2px solid $lavender-drk;
-            border-radius: 50%;
+            border: 2px solid $light-blue;
             padding: 0.45rem;
         }
     }

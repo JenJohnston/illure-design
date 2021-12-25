@@ -298,8 +298,18 @@ document.addEventListener('DOMContentLoaded', function(e){
         document.querySelector('.img-slider').innerHTML += '<div class="btn-container" data-idx="' + idx + '"><button class="pagButton" data-idx="' + idx + '"></button></div>'
     }
         
-    document.querySelector('.img-slider').querySelector('.btn-container').classList.add('active');
-    
+    // start the initial control button in the active state
+
+    document.querySelector('.img-slider')
+    .querySelector('.btn-container')
+    .classList.add('active');
+
+    document.querySelector('.img-slider')
+    .querySelector('.btn-container')
+    .querySelector('.pagButton')
+    .classList.add('btn-active');
+
+
     pageControl.addEventListener('click', (e)=> {
 
         
@@ -340,6 +350,8 @@ document.addEventListener('DOMContentLoaded', function(e){
     
         if (controlTarget.hasAttribute('data-idx')){
 
+            const activeButton = document.querySelectorAll('.pagButton')[currentTexture]
+
             currentTexture = Number(controlTarget.dataset.idx)
 
             // update the active selector
@@ -347,6 +359,11 @@ document.addEventListener('DOMContentLoaded', function(e){
             document.querySelector('.img-slider .active').classList.remove('active');
             document.querySelectorAll('.btn-container')[currentTexture].classList.add('active');
 
+            document.querySelectorAll('.pagButton')[currentTexture].classList.add('btn-active');
+
+            if (activeButton.classList.contains('btn-active')){
+                activeButton.classList.remove('btn-active')
+            }
 
         }
     
@@ -410,9 +427,10 @@ document.addEventListener('DOMContentLoaded', function(e){
                        Projects
                     </h1>
                     <div className="slider-section">
-                        <h2><a href="#">Project Title</a></h2>
-                        <p>THREE.JS | REACT | SASS</p>
-
+                        <div className="sub-title">
+                            <h2><a href="#">Project Title</a></h2>
+                            <p>THREE.JS | REACT | SASS</p>
+                        </div>
                         <div className="img-slider"></div>
                     </div>
                 </section>
