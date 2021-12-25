@@ -3,6 +3,7 @@ uniform float progress;
 
 uniform sampler2D uTexture;
 uniform sampler2D uTexture2;
+uniform sampler2D alphaMap;
 uniform vec4 uResolution;
 
 varying vec2 vUv;
@@ -12,13 +13,11 @@ float PI = 3.141592653589793238;
 
 void main() 
 {
-    // vec2 newUV = vPosition.xy/vec2(1.51 * 1.1, 1.0 * 1.1) + vec2(0.5);
+   
     vec4 texture = texture2D(uTexture, vUv);
-    // vec4 texture2 = texture2D(uTexture2, vUv);
-
-    // vec4 finalTexture = mix(texture, uTexture2, progress);
-
-     
+    
      gl_FragColor = texture;
+
+     if (gl_FragColor.r<0.1 &&gl_FragColor.g<0.1 && gl_FragColor.b<0.1)discard;
 }
    

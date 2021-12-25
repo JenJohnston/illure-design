@@ -155,7 +155,7 @@ window.addEventListener('load', function(e){
     water.rotation.x = Math.PI * - 0.5;
     scene.add( water ); 
 
-    console.log(water)
+    
     
     /**
      *  Models
@@ -428,7 +428,12 @@ const HomePage = () => {
             <canvas className="webgl"></canvas>
         </div>
         <div className="hide-canvas">
+            <video id='galaxyVid' src="textures/projects/3d-galaxy.mp4" type="video/mp4" autoPlay muted loop></video>
+            <video id='particlesVid' src="textures/projects/3d-particles.mp4" type="video/mp4" autoPlay muted loop></video>
+            <video id='portalVid' src="textures/projects/3d-portal.mp4" type="video/mp4" autoPlay muted loop></video>
             <div className="img-slider slider-section"></div>
+            <a href="#" className='title-link'></a>
+            <p className='title-tech'></p>
             <canvas className="projects-webgl"></canvas>
         </div>
         </>

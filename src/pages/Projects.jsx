@@ -20,7 +20,7 @@ import bloomLeaves from '../webGL/bloomLeaves'
 import imageParticleVertexShader from '../shaders/imageParticles/vertex.glsl'
 import imageParticleFragmentShader from '../shaders/imageParticles/fragment.glsl'
 
-import React from 'react'
+import React, { useState } from 'react'
 
 import NavBar from '../components/NavBar'
 
@@ -38,16 +38,38 @@ document.addEventListener('DOMContentLoaded', function(e){
      * Loaders
      */
     // Texture loader
+
+    //image textures
+
     const textureLoader = new THREE.TextureLoader()
     
+    const alphaTexture = textureLoader.load('textures/alpha2.png')
+
     const img1 = textureLoader.load('textures/nature-1.jpg')
     const img2 = textureLoader.load('textures/nature-2.jpg')
+    const jftPromo = textureLoader.load('textures/projects/jft-promo.jpg')
+    const abundancePromo = textureLoader.load('textures/projects/abundance-promo.jpg')
+
+    // video textures
+
+    const galaxyVideo = document.querySelector('#galaxyVid')
+    const particlesVideo = document.querySelector('#particlesVid')
+    const portalVideo = document.querySelector('#portalVid')
+
+    const galaxyTexture = new THREE.VideoTexture(galaxyVideo)
+    const particlesTexture = new THREE.VideoTexture(particlesVideo)
+    const portalTexture = new THREE.VideoTexture(portalVideo)
     
     const imgArray = 
     [
-        img1,
-        img2
+        jftPromo,
+        abundancePromo,
+        galaxyTexture,
+        particlesTexture,
+        portalTexture
     ]
+
+
     
     // Draco loader
     const dracoLoader = new DRACOLoader()
@@ -119,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function(e){
     }
     
     /**
-    * Image Particles
+    * Project Image Particles
     **/
     
     // Geometry
@@ -130,6 +152,7 @@ document.addEventListener('DOMContentLoaded', function(e){
     
     const imageParticlesMaterial = new THREE.ShaderMaterial(
         {
+            
             depthTest: false,
             depthWrite: false,
             extensions: 
@@ -138,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function(e){
             },
             side: THREE.DoubleSide,
             uniforms: {
+                alphaMap: {value: alphaTexture},
                 time: { type: "f", value: 0 },
                 uTime: { type: "f", value: 0 },
                 uProgress: { type: "f", value: 0 },
@@ -258,7 +282,8 @@ document.addEventListener('DOMContentLoaded', function(e){
      **/
      const renderer = new THREE.WebGLRenderer({
         canvas: canvasProjects,
-        antialias: true
+        antialias: true,
+        alpha: true
     })
     
     renderer.setSize(sizes.width, sizes.height)
@@ -296,8 +321,45 @@ document.addEventListener('DOMContentLoaded', function(e){
     
     for (let idx = 0; idx < imgArray.length; idx +=1){
         document.querySelector('.img-slider').innerHTML += '<div class="btn-container" data-idx="' + idx + '"><button class="pagButton" data-idx="' + idx + '"></button></div>'
+
     }
-        
+
+    const namesArray = [
+        {
+            idx: 0, 
+            projectName: 'J Fitness and Training', 
+            projectTech: 'three.js | react | sass'
+        },
+        { 
+            idx: 1, 
+            projectName: 'Abundance Massage and Wellness', 
+            projectTech: 'jQuery | sass'
+        },
+        { 
+            idx: 2, 
+            projectName: 'Threejs-Journey 3D Galaxy', 
+            projectTech: 'Three.js'
+        },
+        { 
+            idx: 3, 
+            projectName: '3D Model to Particles ', 
+            projectTech: 'Three.js | Blender'
+        },
+        { 
+            idx: 4, 
+            projectName: 'Threejs-Journey Magic Portal', 
+            projectTech: 'Three.js | Blender'
+        }
+
+    ]
+
+    
+
+    document.querySelector('.title-link').textContent=namesArray[0].projectName
+
+    document.querySelector('.title-tech').textContent=namesArray[0].projectTech
+
+
     // start the initial control button in the active state
 
     document.querySelector('.img-slider')
@@ -374,6 +436,11 @@ document.addEventListener('DOMContentLoaded', function(e){
     
         setTimeout( () => {
             imageParticlesMesh.material.uniforms.uTexture.value = imgArray[currentTexture]
+
+            document.querySelector('.title-link').textContent=namesArray[currentTexture].projectName
+
+            document.querySelector('.title-tech').textContent=namesArray[currentTexture].projectTech
+
         }, delay);
     
     })
@@ -416,9 +483,14 @@ document.addEventListener('DOMContentLoaded', function(e){
     }
     
     tick()
+
     })
 
+    
+
     const Projects = () => {
+
+        
         return (
             <>
             <div className="main-content">
@@ -428,8 +500,8 @@ document.addEventListener('DOMContentLoaded', function(e){
                     </h1>
                     <div className="slider-section">
                         <div className="sub-title">
-                            <h2><a href="#">Project Title</a></h2>
-                            <p>THREE.JS | REACT | SASS</p>
+                            <h2><a href="#" className='title-link'></a></h2>
+                            <p className='title-tech'></p>
                         </div>
                         <div className="img-slider"></div>
                     </div>
@@ -439,6 +511,9 @@ document.addEventListener('DOMContentLoaded', function(e){
                 </footer>
             </div>
             <div className="hide-canvas">
+                <video id='galaxyVid' src="textures/projects/3d-galaxy.mp4" type="video/mp4" autoPlay muted loop></video>
+                <video id='particlesVid' src="textures/projects/3d-particles.mp4" type="video/mp4" autoPlay muted loop></video>
+                <video id='portalVid' src="textures/projects/3d-portal.mp4" type="video/mp4" autoPlay muted loop></video>
                 <canvas className="webgl"></canvas>
             </div>
             <div className='show-canvas'>
