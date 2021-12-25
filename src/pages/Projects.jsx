@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function(e){
         },
         { 
             idx: 3, 
-            projectName: '3D Model to Particles ', 
+            projectName: 'awwwards Fabio Ottaviani demo ', 
             projectTech: 'Three.js | Blender'
         },
         { 
