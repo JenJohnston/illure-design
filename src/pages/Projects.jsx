@@ -511,10 +511,23 @@ document.addEventListener('DOMContentLoaded', function(e){
                 </footer>
             </div>
             <div className="hide-canvas">
+                <div id="gallery-control-wrap">
+                    <div className="n"></div>
+                    <div className="n n1"></div>
+                    <div className="n n2"></div>
+                    <div className="n n3"></div>
+                    <div className="n n4"></div>
+                    <div className="n n5"></div>
+                    <div className="n n6"></div>
+                    <div className="n n7"></div>
+                    <div className="n n8"></div>
+                </div>
+                <div id="block"></div>
                 <video id='galaxyVid' src="textures/projects/3d-galaxy.mp4" type="video/mp4" autoPlay muted loop></video>
                 <video id='particlesVid' src="textures/projects/3d-particles.mp4" type="video/mp4" autoPlay muted loop></video>
                 <video id='portalVid' src="textures/projects/3d-portal.mp4" type="video/mp4" autoPlay muted loop></video>
                 <canvas className="webgl"></canvas>
+                <canvas className="gallery-webgl"></canvas>
             </div>
             <div className='show-canvas'>
                 <canvas className="projects-webgl"></canvas>

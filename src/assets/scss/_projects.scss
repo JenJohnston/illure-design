@@ -16,6 +16,8 @@
         display: grid;
         grid-template-columns: 1.1fr auto 1fr;
         grid-template-rows: 1fr 1fr;
+        transform: scale(0.94);
+        animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
         
         .sub-title {
             text-align: left;

@@ -431,10 +431,22 @@ const HomePage = () => {
             <video id='galaxyVid' src="textures/projects/3d-galaxy.mp4" type="video/mp4" autoPlay muted loop></video>
             <video id='particlesVid' src="textures/projects/3d-particles.mp4" type="video/mp4" autoPlay muted loop></video>
             <video id='portalVid' src="textures/projects/3d-portal.mp4" type="video/mp4" autoPlay muted loop></video>
-            <div className="img-slider slider-section"></div>
+            <div className="img-slider slider-section" id="block"></div>
+            <div id="gallery-control-wrap">
+                <div className="n"></div>
+                <div className="n n1"></div>
+                <div className="n n2"></div>
+                <div className="n n3"></div>
+                <div className="n n4"></div>
+                <div className="n n5"></div>
+                <div className="n n6"></div>
+                <div className="n n7"></div>
+                <div className="n n8"></div>
+            </div>
             <a href="#" className='title-link'></a>
             <p className='title-tech'></p>
             <canvas className="projects-webgl"></canvas>
+            <canvas className="gallery-webgl"></canvas>
         </div>
         </>
     )
