@@ -34,6 +34,7 @@ import NavBar from '../components/NavBar'
     let elems = [...document.querySelectorAll('.n')]
 
     window.addEventListener('wheel', (e) =>{
+        
         mouseSpeed += e.deltaY * 0.0003
     })
 
@@ -42,6 +43,10 @@ import NavBar from '../components/NavBar'
     function raf(){
         position += mouseSpeed
         mouseSpeed *= 0.8
+
+        function clamp(val, min, max){
+            return Math.min(Math.max(min, +val), max);
+        }
 
         objs.forEach((o, i) => {
 
@@ -52,6 +57,7 @@ import NavBar from '../components/NavBar'
             let scale = 1 + 0.2 * o.dist
             meshes[i].position.y = 0.543 + i * 3.2 - position * 3.2
             meshes[i].scale.set(scale, scale, scale)
+            meshes[i].material.uniforms.uDistFromCenter.value = o.dist
 
         })
 
@@ -59,7 +65,7 @@ import NavBar from '../components/NavBar'
         let diff = rounded - position
 
         position += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.015;
-
+        position = clamp(position, 0, 8)
         controlWrap.style.transform = `translate(0, ${-position*100 +50}px)`
         window.requestAnimationFrame(raf)
     }
@@ -197,10 +203,12 @@ import NavBar from '../components/NavBar'
     const gallerySlideMaterial = new THREE.ShaderMaterial( 
         {
             side: THREE.DoubleSide,
+            transparent: true,
             uniforms:
             {
                 uTime: {type: 'f', value: 0},
-                uTexture: {type: 't', value: null}
+                uTexture: {type: 't', value: null},
+                uDistFromCenter: {type: 'f', value: 0}
             },
             vertexShader: gallerySliderVertexShader,
             fragmentShader: gallerySliderFragmentShader

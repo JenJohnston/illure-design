@@ -99,6 +99,7 @@ module.exports =
         static: "./dist",
         historyApiFallback: true,
         hot: true,
+        open: true
         
 
     }
