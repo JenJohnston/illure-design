@@ -44,28 +44,23 @@ import NavBar from '../components/NavBar'
         mouseSpeed *= 0.8
 
         objs.forEach((o, i) => {
+
             o.dist = Math.min(Math.abs(position - i),1)
             o.dist = 1 - o.dist**2
             elems[i].style.transform = `scale(${1 + 0.4*o.dist})`
 
-            let scale = 1 + 0.4 * o.dist
-            meshes[i].position.y = 0.543 + (i * 4.2 - position * 4.2)
-            
+            let scale = 1 + 0.2 * o.dist
+            meshes[i].position.y = 0.543 + i * 3.2 - position * 3.2
+            meshes[i].scale.set(scale, scale, scale)
+
         })
 
         rounded = Math.round(position)
-
         let diff = rounded - position
 
         position += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.015;
 
-        // block.style.transform = `translate(0, ${position * 100}px)`
         controlWrap.style.transform = `translate(0, ${-position*100 +50}px)`
-        meshes.forEach((mesh, i) =>
-            {
-                mesh.position.y = 0.543 + (i * 4.2 + position * 4.2)
-            }
-        )
         window.requestAnimationFrame(raf)
     }
 
@@ -156,16 +151,6 @@ import NavBar from '../components/NavBar'
     bgImageMesh.rotation.y = -0.747
     bgImageMesh.rotation.z = 0.034
 
-    
-
-    // gui.add(bgImageMesh.position, 'x', -10, 10, 0.001).name('positionX')
-    // gui.add(bgImageMesh.position, 'y', -10, 10, 0.001).name('positionY')
-    // gui.add(bgImageMesh.position, 'z', -10, 10, 0.001).name('positionZ')
-
-    // gui.add(bgImageMesh.rotation, 'x', -10, 10, 0.001).name('rotationX')
-    // gui.add(bgImageMesh.rotation, 'y', -10, 10, 0.001).name('rotationY')
-    // gui.add(bgImageMesh.rotation, 'z', -10, 10, 0.001).name('rotationZ')
-
       /**
     * gallery slider
     **/
@@ -173,6 +158,7 @@ import NavBar from '../components/NavBar'
     const gallerySlideGeom = new THREE.PlaneBufferGeometry(5, 3.5)
     const materials = []
     const meshes = []
+    const groups = []
 
 
     function handleImages()
@@ -182,20 +168,27 @@ import NavBar from '../components/NavBar'
             {
                 let material = gallerySlideMaterial.clone()
                 materials.push(material)
+                let group = new THREE.Group()
+
                 material.uniforms.uTexture.value = new THREE.Texture(im)
                 material.uniforms.uTexture.value.needsUpdate = true
-
-                console.log(im)
-
-                let geometry = new THREE.PlaneBufferGeometry(5, 3.5)
+                
+                let geometry = new THREE.PlaneBufferGeometry(4, 2.5, 20, 20)
                 let mesh = new THREE.Mesh(geometry, material)
-                scene.add(mesh)
+                group.add(mesh)
+                groups.push(group)
+                scene.add(group)
                 meshes.push(mesh)
+
                 mesh.rotation.y = -0.759
 
                 mesh.position.x = 1.064
-                mesh.position.y = 0.543 + (i*4.2)
+                mesh.position.y = 0.543 + (i*1.2)
                 mesh.position.z = -1.019
+
+                group.rotation.y = -0.35
+                group.rotation.x = 6.39
+                group.rotation.z = -6.12
         
             }
         )
@@ -218,22 +211,6 @@ import NavBar from '../components/NavBar'
 
     const gallerySlideMesh = new THREE.Mesh(gallerySlideGeom, gallerySlideMaterial)
 
-    // scene.add(gallerySlideMesh)
-
-    gallerySlideMesh.position.x = 1.064
-    gallerySlideMesh.position.y = 0.543
-    gallerySlideMesh.position.z = -1.019
-
-    gallerySlideMesh.rotation.y = -0.759
-
-    // gui.add(gallerySlideMesh.position, 'x', -10, 10, 0.001).name('positionX')
-    // gui.add(gallerySlideMesh.position, 'y', -10, 10, 0.001).name('positionY')
-    // gui.add(gallerySlideMesh.position, 'z', -10, 10, 0.001).name('positionZ')
-
-    // gui.add(gallerySlideMesh.rotation, 'x', -10, 10, 0.001).name('rotationX')
-    // gui.add(gallerySlideMesh.rotation, 'y', -10, 10, 0.001).name('rotationY')
-    // gui.add(gallerySlideMesh.rotation, 'z', -10, 10, 0.001).name('rotationZ')
-
     let treeBloom = new THREE.Object3D()
 
     gltfLoader.load(
@@ -251,8 +228,6 @@ import NavBar from '../components/NavBar'
             placeOnLoad: true
         }
     )
-
-  
 
     function init(gltf){
         treeBloom.add(gltf.scene)
@@ -309,8 +284,6 @@ import NavBar from '../components/NavBar'
             renderer.setSize(sizes.width, sizes.height)
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
         
-           
-        
     })
     
     /**
@@ -363,10 +336,6 @@ import NavBar from '../components/NavBar'
     const tick = () =>
     {
         const elapsedTime = clock.getElapsedTime()
-
-         // update gallerySlides
-         
-        //  gallerySlideMaterial.uniforms.uTime.value = elapsedTime * 0.0005;
 
          if(materials)
          {

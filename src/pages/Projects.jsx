@@ -512,17 +512,36 @@ document.addEventListener('DOMContentLoaded', function(e){
             </div>
             <div className="hide-canvas">
                 <div id="gallery-control-wrap">
-                    <div className="n"></div>
-                    <div className="n n1"></div>
-                    <div className="n n2"></div>
-                    <div className="n n3"></div>
-                    <div className="n n4"></div>
-                    <div className="n n5"></div>
-                    <div className="n n6"></div>
-                    <div className="n n7"></div>
-                    <div className="n n8"></div>
+                    <div className="n">
+                    <img src="#" className="gallery-img"></img>
+                    </div>
+                    <div className="n n1">
+                    <img src="#" className="gallery-img"></img>
+                    </div>
+                    <div className="n n2">
+                    <img src="#" className="gallery-img"></img>
+                    </div>
+                    <div className="n n3">
+                    <img src="#" className="gallery-img"></img>
+                    </div>
+                    <div className="n n4">
+                    <img src="#" className="gallery-img"></img>
+                    </div>
+                    <div className="n n5">
+                    <img src="#" className="gallery-img"></img>
+                    </div>
+                    <div className="n n6">
+                    <img src="#" className="gallery-img"></img>
+                    </div>
+                    <div className="n n7">
+                    <img src="#" className="gallery-img"></img>
+                    </div>
+                    <div className="n n8">
+                    <img src="#" className="gallery-img"></img>
+                    </div>
                 </div>
                 <div id="block"></div>
+                <img src="#" className="gallery-img"></img>
                 <video id='galaxyVid' src="textures/projects/3d-galaxy.mp4" type="video/mp4" autoPlay muted loop></video>
                 <video id='particlesVid' src="textures/projects/3d-particles.mp4" type="video/mp4" autoPlay muted loop></video>
                 <video id='portalVid' src="textures/projects/3d-portal.mp4" type="video/mp4" autoPlay muted loop></video>

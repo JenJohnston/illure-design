@@ -433,15 +433,33 @@ const HomePage = () => {
             <video id='portalVid' src="textures/projects/3d-portal.mp4" type="video/mp4" autoPlay muted loop></video>
             <div className="img-slider slider-section" id="block"></div>
             <div id="gallery-control-wrap">
-                <div className="n"></div>
-                <div className="n n1"></div>
-                <div className="n n2"></div>
-                <div className="n n3"></div>
-                <div className="n n4"></div>
-                <div className="n n5"></div>
-                <div className="n n6"></div>
-                <div className="n n7"></div>
-                <div className="n n8"></div>
+            <div className="n">
+                <img src="#" className="gallery-img"></img>
+                </div>
+                <div className="n n1">
+                <img src="#" className="gallery-img"></img>
+                </div>
+                <div className="n n2">
+                <img src="#" className="gallery-img"></img>
+                </div>
+                <div className="n n3">
+                <img src="#" className="gallery-img"></img>
+                </div>
+                <div className="n n4">
+                <img src="#" className="gallery-img"></img>
+                </div>
+                <div className="n n5">
+                <img src="#" className="gallery-img"></img>
+                </div>
+                <div className="n n6">
+                <img src="#" className="gallery-img"></img>
+                </div>
+                <div className="n n7">
+                <img src="#" className="gallery-img"></img>
+                </div>
+                <div className="n n8">
+                <img src="#" className="gallery-img"></img>
+                </div>
             </div>
             <a href="#" className='title-link'></a>
             <p className='title-tech'></p>
